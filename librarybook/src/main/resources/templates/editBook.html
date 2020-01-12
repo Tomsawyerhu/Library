@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<div style="margin:0px auto; width:500px">
+
+    <form action="/update" method="post">
+
+        书名: <input name="name" th:value="${c.name}"> <br>
+        分类: <input name="category" th:value="${c.category}"> <br>
+        索引：<input name="indexing" th:value="${c.indexing}"> <br>
+        描述1：<input name="intro1" th:value="${c.getIntro1()}"> <br>
+        描述2：<input name="intro2" th:value="${c.getIntro2()}"> <br>
+
+        <input name="id" type="hidden" th:value="${c.getId()}">
+        <button type="submit">提交</button>
+
+    </form>
+</div>
+
+</body>
+</html>

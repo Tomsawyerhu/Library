@@ -1,0 +1,30 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>管理员入口</title>
+		<script src="../static/js/jquery.min.js" th:src="@{js/jquery.min.js}" type="text/javascript" charset="utf-8"></script>
+	    <script type="text/javascript">
+		function submit() {
+			$.post("/admincheck",{"username":document.getElementById("username").value,"password":document.getElementById("password").value},function(response){
+				if(response==="yes") window.location.href="/adminjump";
+				else alert("登陆失败");
+			});
+		}
+	    </script>
+	</head>
+	<body>
+							<p>
+								<label for="username">管理员账户：</label>
+								<input type="text" name="username" id="username" value="" size="40" class="text" />
+								<br>
+							</p>
+							<p>
+								<label for="password">密码：</label>
+								<input type="password" name="password" id="password" value="" size="40" class="text" />
+								<br>
+							</p>
+								<button th:onclick="submit()" >登录</button>
+								<br>
+	</body>
+</html>

@@ -1,0 +1,376 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>数据汇总</title>
+    <!-- Bootstrap Styles-->
+    <link href="../static/assets/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="../static/assets/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="../static/assets/js/morris/morris-0.4.3.min.css" th:href="@{/js/morris/morris-0.4.3.min.css}" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="../static/assets/css/custom-styles.css" th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/assets/js/Lightweight-Chart/cssCharts.css" th:href="@{/js/Lightweight-Chart/cssCharts.css}" > 
+	<!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="../static/assets/js/jquery-1.10.2.js" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <!-- Bootstrap Js -->
+    <script src="../static/assets/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+	 
+    <!-- Metis Menu Js -->
+    <script src="../static/assets/js/jquery.metisMenu.js" th:src="@{/js/jquery.metisMenu.js}"></script>
+    <!-- Morris Chart Js -->
+    <script src="../static/assets/js/morris/raphael-2.1.0.min.js" th:src="@{/js/morris/raphael-2.1.0.min.js}"></script>
+    <script src="../static/assets/js/morris/morris.js" th:src="@{/js/morris/morris.js}"></script>
+	
+	
+	<script src="../static/assets/js/easypiechart.js" th:src="@{/js/easypiechart.js}"></script>
+	<script src="../static/assets/js/easypiechart-data.js" th:src="@{/js/easypiechart-data.js}"></script>
+	
+	 <script src="../static/assets/js/Lightweight-Chart/jquery.chart.js" th:src="@{/js/Lightweight-Chart/jquery.chart.js}"></script>
+	
+    <!-- Custom Js -->
+    <script src="../static/assets/js/custom-scripts.js" th:src="@{/js/custom-scripts.js}"></script>
+
+      
+    <!-- Chart Js -->
+    <script type="text/javascript" src="../static/assets/js/chart.min.js" th:src="@{/js/Chart.min.js}"></script>
+    <script type="text/javascript" src="../static/assets/js/chartjs.js" th:src="@{/js/chartjs.js}"></script> 
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><strong><i class="icon fa fa-plane"></i> LIBRARY</strong></a>
+				
+		<div id="sideNav" href="">
+		<i class="fa fa-bars icon"></i> 
+		</div>
+            </div>
+      
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a class="active-menu" href="#"><i class="fa fa-dashboard"></i> DATAVIEW</a>
+                    </li>
+					<li>
+                        <a th:href="@{/list}"><i class="fa fa-table"></i> BOOKVIEW</a>
+                    </li>
+                   
+                    
+                    <li>
+                        <a th:href="@{/admin/upload}"><i class="fa fa-edit"></i> UPLOAD </a>
+                    </li>
+
+                   
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+      
+		<div id="page-wrapper">
+		  <div class="header"> 
+                        <h1 class="page-header">
+                            数据汇总 <small>Welcome Administrator</small>
+                        </h1>
+						<ol class="breadcrumb">
+					  <li><a href="#">Home</a></li>
+					  <li><a href="#">DataView</a></li>
+					  <li class="active">Data</li>
+					</ol> 
+									
+		</div>
+            <div id="page-inner">
+
+                <!-- /. ROW  -->
+	
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="board">
+                        <div class="panel panel-primary">
+						<div class="number">
+							<h3>
+								<h3 th:text="${visits}">0</h3>
+								<small>Daily Visits</small>
+							</h3> 
+						</div>
+						<div class="icon">
+						   <i class="fa fa-eye fa-5x red"></i>
+						</div>
+		 
+                        </div>
+						</div>
+                    </div>
+					
+					       <div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="board">
+                        <div class="panel panel-primary">
+						<div class="number">
+							<h3>
+								<h3 th:text="${users}">0</h3>
+								<small>Users</small>
+							</h3> 
+						</div>
+						<div class="icon">
+						   <i class="fa fa-shopping-cart fa-5x blue"></i>
+						</div>
+		 
+                        </div>
+						</div>
+                    </div>
+					
+					       <div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="board">
+                        <div class="panel panel-primary">
+						<div class="number">
+							<h3>
+								<h3 th:text="${uploads}">0</h3>
+								<small>Uploads</small>
+							</h3> 
+						</div>
+						<div class="icon">
+						   <i class="fa fa-comments fa-5x green"></i>
+						</div>
+		 
+                        </div>
+						</div>
+                    </div>
+					
+					       <div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="board">
+                        <div class="panel panel-primary">
+						<div class="number">
+							<h3>
+								<h3 th:text="${articles}">0</h3>
+								<small>Articles</small>
+							</h3> 
+						</div>
+						<div class="icon">
+						   <i class="fa fa-user fa-5x yellow"></i>
+						</div>
+		 
+                        </div>
+						</div>
+                    </div>
+				   
+                </div>
+				     <div class="row">
+                        <div class="col-sm-6 col-xs-12">  
+                            <div class="panel panel-default chartJs">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title">月访客量折线图</div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <canvas id="line-chart" class="chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="panel panel-default chartJs">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title">月访客量柱状图</div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <canvas id="bar-chart" class="chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+		
+		
+				<div class="row">
+				<div class="col-md-5">
+						<div class="panel panel-default">
+						<div class="panel-heading">
+							年访客量折线图
+						</div>
+						<div class="panel-body">
+							<div id="morris-line-chart"></div>
+						</div>						
+					</div>   
+					</div>		
+					
+						<div class="col-md-7">
+					<div class="panel panel-default">
+					<div class="panel-heading">
+                                年访客量柱状图
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-bar-chart"></div>
+                            </div>
+						
+					</div>  
+					</div>
+					
+				</div> 
+			 
+				
+				
+                <div class="row">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">                            
+							<div class="panel-heading">
+							注册量统计图
+						</div>
+						<div class="panel-body">
+							<div id="morris-area-chart"></div>
+						</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                各种书籍比例
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-donut-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+				<div class="row">
+				<div class="col-md-12">
+				
+					</div>		
+				</div> 	
+                <!-- /. ROW  -->
+
+	   
+				
+				
+				
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                用户建议
+                            </div>
+                            <div class="panel-body">
+                                <div class="list-group">
+
+                                    <a href="#" class="list-group-item" style="text-align: center" th:text="${advice.get('1')}">
+
+                                    </a>
+                                    <a href="#" class="list-group-item" style="text-align: center" th:text="${advice.get('2')}">
+
+                                    </a>
+                                    <a href="#" class="list-group-item" style="text-align: center" th:text="${advice.get('3')}">
+
+                                    </a>
+                                    <a href="#" class="list-group-item" style="text-align: center" th:text="${advice.get('4')}">
+
+                                    </a>
+                                    <a href="#" class="list-group-item" style="text-align: center" th:text="${advice.get('5')}">
+
+                                    </a>
+                                    <a href="#" class="list-group-item" style="text-align: center" th:text="${advice.get('6')}">
+
+                                    </a>
+                                </div>
+                                <div class="text-right">
+                                    <a th:href="@{/admin/analysis}">More Advice <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8 col-sm-12 col-xs-12">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                最受喜爱的书籍
+                            </div> 
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>S No.</th>
+                                                <th>Book Name</th>
+                                                <th>index</th>
+                                                <th>category</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td th:text="${book1.getName()}">Book1</td>
+                                                <td th:text="${book1.getIndexing()}">Index1</td>
+                                                <td th:text="${book1.getCategory()}">Category1</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td th:text="${book2.getName()}">Book2</td>
+                                                <td th:text="${book2.getIndexing()}">Index2</td>
+                                                <td th:text="${book2.getCategory()}">Category2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td th:text="${book3.getName()}">Book3</td>
+                                                <td th:text="${book3.getIndexing()}">Index3</td>
+                                                <td th:text="${book3.getCategory()}">Category3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td th:text="${book4.getName()}">Book4</td>
+                                                <td th:text="${book4.getIndexing()}">Index4</td>
+                                                <td th:text="${book4.getCategory()}">Category4</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td th:text="${book5.getName()}">Book5</td>
+                                                <td th:text="${book5.getIndexing()}">Index5</td>
+                                                <td th:text="${book5.getCategory()}">Category5</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td th:text="${book6.getName()}">Book6</td>
+                                                <td th:text="${book6.getIndexing()}">Index6</td>
+                                                <td th:text="${book6.getCategory()}">Category6</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+			
+		
+				
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    
+
+</body>
+
+</html>

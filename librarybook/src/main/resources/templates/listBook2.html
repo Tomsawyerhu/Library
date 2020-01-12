@@ -1,0 +1,264 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>图书大全</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="../static/css/templatemo_style.css" th:href="@{css/templatemo_style.css}" rel="stylesheet" type="text/css" />
+    <script  th:src="@{js/jquery.min.js}" src="../static/js/jquery.min.js"  ></script>
+    <script language="javascript" type="text/javascript">
+        function clearText(field)
+        {
+            if (field.defaultValue === field.value) field.value = '';
+            else if (field.value === '') field.value = field.defaultValue;
+
+        }
+    </script>
+    <script type="text/javascript">
+        function search() {
+            $.post("/search",{"index":document.getElementById("bookindex").value,"name":document.getElementById("bookname").value,"category":document.getElementById("bookcategory").value},function (response) {
+                if(response.status==="yes"){
+                    document.getElementById("table").removeAttribute("hidden");
+                    document.getElementById("0").removeAttribute("hidden");
+                    document.getElementById("1").removeAttribute("hidden");
+                    document.getElementById("1").innerHTML=response.name;
+                    document.getElementById("2").removeAttribute("hidden");
+                    document.getElementById("2").innerHTML=response.category;
+                    document.getElementById("6").removeAttribute("hidden");
+                    document.getElementById("6").innerHTML=response.index;
+
+                    document.getElementById("3").setAttribute("text",response.id);
+                    document.getElementById("4").setAttribute("href","/summary?id="+response.id);
+                    document.getElementById("4").removeAttribute("hidden");
+                    document.getElementById("5").setAttribute("href","/download?id="+response.id);
+                    document.getElementById("5").removeAttribute("hidden");
+                }else{
+                    window.location.href="/userlist";
+                }
+            });
+        }
+
+        function stamp(index,username) {
+            $.post("/stampBook/add",{"user":username,"index":index},function (response) {
+                if(response==="yes") alert("收藏成功");
+                else alert("收藏失败");
+            });
+        }
+    </script>
+</head>
+<body >
+<div id="templatemo_container">
+    <div id="templatemo_banner">
+        <!--  Free CSS Templates @ www.TemplateMo.com  -->
+        <input type="hidden" id="text1" th:value="${username}">
+        <div id="welcome">
+            <p  th:text="'欢迎来到图书馆!'+${username}">欢迎来到图书馆! </p>
+        </div>
+
+    </div> <!-- end of banner -->
+    <div id="logout">
+        <a th:href="@{/contact}" target="_blank">联系我们</a>&nbsp;
+        <a th:href="@{/messageBoard}" target="_blank">留言板</a>&nbsp;
+        <a th:href="@{/personalInfo}" target="_blank">个人信息</a>&nbsp;
+        <a th:href="@{/log(username=${username})}">注销</a>
+    </div>
+
+    <div id="templatemo_menu">
+        <ul>
+            <li><a th:href="@{/menu(username=${username})}" >主页</a></li>
+            <li><a th:href="@{/userlist(username=${username})}" class="current">图书大全</a></li>
+            <li><a href="/article">读者文摘</a></li>
+            <li><a href="#" >在线服务</a></li>
+            <li><a th:href="@{/stamp(username=${username})}" >我的收藏</a></li>
+            <li><a href="#" class="last">近期活动</a></li>
+        </ul>
+    </div><!-- end of menu -->
+
+
+    <div id="templatemo_content_top">
+
+        <div class="section_w335 fl margin_right_40" id="div1"  th:if="${num} ge '1'">
+
+            <div class="header_01" th:text="${book1.getName()}">
+                <a>书名1</a></div>
+            <div class="image_wrapper">
+                <img src="../static/img/templatemo_image_01.jpg" th:src="@{img/templatemo_image_01.jpg}" alt="image" />
+            </div>
+
+            <p th:text="${book1.getIntro1()}"></p>
+             <p th:text="${book1.getIntro2()}"></p>
+            <div class="download">
+                <a th:href="@{/download(id=${book1.getId()})}">下载</a>&nbsp;&nbsp;<a th:href="@{/summary(id=${book1.getId()})}">详情</a><br>
+                <br><button th:onclick="stamp([[${book1.indexing}]],[[${username}]]);">收藏</button>
+            </div>
+        </div>
+
+        <div class="section_w335 fl" id="div2" th:if="${num} ge '2'">
+
+            <div class="header_01" th:text="${book2.getName()}">
+                <a>书名2</a></div>
+            <div class="image_wrapper">
+                <img src="../static/img/templatemo_image_02.jpg" th:src="@{img/templatemo_image_02.jpg}" alt="image" />
+            </div>
+
+            <p th:text="${book2.getIntro1()}"></p>
+            <p th:text="${book2.getIntro2()}"></p>
+            <div class="download">
+                <a th:href="@{/download(id=${book2.getId()})}">下载</a>&nbsp;&nbsp;<a th:href="@{/summary(id=${book2.getId()})}">详情</a><br>
+                <br><button th:onclick="stamp([[${book2.indexing}]],[[${username}]]);">收藏</button>
+            </div>
+        </div>
+
+        <div class="margin_bottom_40" th:if="${num} ge '3'"></div>
+
+        <div class="section_w335 fl margin_right_40" id="div3" th:if="${num} ge '3'">
+
+            <div class="header_01" th:text="${book3.getName()}">
+                <a>书名3</a></div>
+            <div class="image_wrapper">
+                <img src="../static/img/templatemo_image_03.jpg"  th:src="@{img/templatemo_image_03.jpg}" alt="image" />
+            </div>
+
+            <p th:text="${book3.getIntro1()}"></p>
+            <p th:text="${book3.getIntro2()}"></p>
+            <div class="download">
+                <a th:href="@{/download(id=${book3.getId()})}">下载</a>&nbsp;&nbsp;<a th:href="@{/summary(id=${book3.getId()})}">详情</a><br>
+                <br><button th:onclick="stamp([[${book3.indexing}]],[[${username}]]);">收藏</button>
+            </div>
+        </div>
+
+        <div class="section_w335 fl" id="div4" th:if="${num} ge '4'">
+
+            <div class="header_01" th:text="${book4.getName()}">
+                <a>书名4</a>
+            </div>
+            <div class="image_wrapper">
+                <img src="../static/img/templatemo_image_04.jpg" th:src="@{img/templatemo_image_04.jpg}" alt="image" />
+            </div>
+
+            <p th:text="${book4.getIntro1()}"></p>
+            <p th:text="${book4.getIntro2()}"></p>
+            <div class="download">
+                <a th:href="@{/download(id=${book4.getId()})}">下载</a>&nbsp;&nbsp;<a th:href="@{/summary(id=${book4.getId()})}">详情</a><br>
+                <br><button th:onclick="stamp([[${book4.indexing}]],[[${username}]]);">收藏</button>
+            </div>
+        </div>
+        <div class="margin_bottom_40" th:if="${num} ge '5'"></div>
+
+        <div class="section_w335 fl margin_right_40" id="div5" th:if="${num} ge '5'">
+
+            <div class="header_01" th:text="${book5.getName()}">
+                <a >书名5</a>
+            </div>
+            <div class="image_wrapper">
+                <img src="../static/img/templatemo_image_01.jpg" th:src="@{img/templatemo_image_01.jpg}" alt="image" />
+            </div>
+
+            <p th:text="${book5.getIntro1()}"></p>
+            <p th:text="${book5.getIntro2()}"></p>
+            <div class="download">
+                <a th:href="@{/download(id=${book5.getId()})}">下载</a>&nbsp;&nbsp;<a th:href="@{/summary(id=${book5.getId()})}">详情</a><br>
+                <br><button th:onclick="stamp([[${book5.indexing}]],[[${username}]]);">收藏</button>
+            </div>
+        </div>
+
+        <div class="section_w335 fl" id="div6" th:if="${num} ge '6'">
+
+            <div class="header_01" th:text="${book6.getName()}">
+                <a >书名6</a>
+            </div>
+            <div class="image_wrapper">
+                <img src="../static/img/templatemo_image_01.jpg" th:src="@{img/templatemo_image_01.jpg}" alt="image" />
+            </div>
+            <p th:text="${book6.getIntro1()}"></p>
+            <p th:text="${book6.getIntro2()}"></p>
+            <div class="download">
+                <a th:href="@{/download(id=${book6.getId()})}">下载</a>&nbsp;&nbsp;<a th:href="@{/summary(id=${book6.getId()})}">详情</a><br>
+                <br><button th:onclick="stamp([[${book6.indexing}]],[[${username}]]);">收藏</button>
+            </div>
+        </div>
+        <div class="margin_bottom_20"></div>
+
+        <div align="center" style="font-size: 15px">
+            <a th:href="@{/userlist(start=0)}">[首  页]</a>
+            <a th:href="@{/userlist(start=${page.number-1})}">[上一页]</a>
+            <a th:href="@{/userlist(start=${page.number+1})}">[下一页]</a>
+            <a th:href="@{/userlist(start=${page.totalPages-1})}">[末  页]</a>
+        </div>
+
+        <div class="margin_bottom_20 b_bottom"></div>
+
+
+        <div class="cleaner"></div>
+    </div> <!-- end of content top -->
+
+    <div id="templatmeo_content_bottom">
+
+        <div>
+            <div align="center">
+            <h1>条件查询</h1><br>
+            书名：<input id="bookname" placeholder="请输入书名"><br><br>
+            分类：<input id="bookcategory" placeholder="请输入分类"><br><br>
+            索引：<input id="bookindex" placeholder="请输入索引"><br><br><br>
+            <button th:onclick="search()">查询</button><br><br>
+            </div>
+
+            <table align='center' border='1' cellspacing='0' id="table" hidden="hidden">
+                <tr>
+                    <td>预览</td>
+                    <td>书名</td>
+                    <td>分类</td>
+                    <td>索引</td>
+                    <td hidden="hidden">ID</td>
+                    <td>简介</td>
+                    <td>下载</td>
+                </tr>
+                <tr  >
+                    <td id="0" hidden="hidden" ><a></a></td>
+                    <td id="1" hidden="hidden"><a>书名</a></td>
+                    <td id="2" hidden="hidden"><a>分类</a></td>
+                    <td id="6" hidden="hidden"><a>索引</a></td>
+                    <td id="3" hidden="hidden"><a></a></td>
+                    <td><a id="4" th:target="_blank" hidden="hidden">点击查看简介</a></td>
+                    <td><a id="5" hidden="hidden">点击下载</a></td>
+                </tr>
+            </table>
+            <br><br>
+        </div>
+
+        <div class="margin_bottom_40 b_bottom"></div>
+        <div class="margin_bottom_30"></div>
+
+        <div id="templatemo_footer">
+
+            <ul class="footer_list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Books</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Services</a></li>
+                <li class="last"><a href="#">Contact</a></li>
+            </ul>
+
+            <div class="margin_bottom_10"></div>
+
+            Copyright © 2024 <a href="#">DY Pro Studio</a> <!-- Credit: www.templatemo.com -->
+
+            <div class="margin_bottom_20"></div>
+
+            <a href="http://validator.w3.org/check?uri=referer"><img style="border:0;width:88px;height:31px" src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" width="88" height="31" vspace="8" border="0" /></a>
+            <a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px"  src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS!" vspace="8" border="0" /></a>
+
+        </div>
+
+        <div class="cleaner"></div>
+    </div> <!-- end of content bottom -->
+</div> <!-- end of container -->
+<!--  Free Website Templates @ TemplateMo.com  -->
+<!-- templatemo 114 history -->
+<!--
+History Template
+http://www.templatemo.com/preview/templatemo_114_history
+-->
+</body>
+</html>

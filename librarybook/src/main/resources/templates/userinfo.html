@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>用户信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../static/css/kube.min.css" th:href="@{css/kube.min.css}" type="text/css" />
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css" th:href="@{css/font-awesome.min.css}" type="text/css" />
+    <link rel="stylesheet" href="../static/css/custom.min.css" th:href="@{css/custom.min.css}" type="text/css" />
+    <link rel="shortcut icon" href="../static/img/favicon.png" th:href="@{img/favicon.png}"/>
+
+	<style>
+		.intro h1:before {
+			/* Edit this with your name or anything else */
+			content: 'DYPRO';
+		}
+	</style>
+	<script src="../static/js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+	<script src="../static/js/typed.min.js" th:src="@{js/typed.min.js}"></script>
+	<script src="../static/js/kube.min.js" th:src="@{js/kube.min.js}"></script>
+	<script src="../static/js/site.js" th:src="@{js/site.js}"></script>
+	<script>
+		function newTyped(){}$(function(){$("#typed").typed({
+			// Change to edit type effect
+			strings: ["School Time", "Childhood Dream", "Lifelong Memory"],
+
+			typeSpeed:90,backDelay:700,contentType:"html",loop:!0,resetCallback:function(){newTyped()}}),$(".reset").click(function(){$("#typed").typed("reset")})});
+
+		function notebook(){
+			window.location.href="userInfo/notebook";
+		}
+		function cup(){
+			window.location.href="userInfo/cup";
+		}
+
+	</script>
+</head>
+<body>
+	<!-- Navigation -->
+	<div class="main-nav">
+		<div class="container">
+			<header class="group top-nav">
+				<div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1">
+				    <span class="logo">DYPRO</span>
+				</div>
+			    <nav id="navbar-1" class="navbar item-nav">
+				    <ul>
+				        <li class="active"><a href="#about">About us</a></li>
+				        <li><a href="#experiences">Information</a></li>
+				        <li><a href="#achievements">Other things about you</a></li>
+				        <li><a href="#skills">Something Interesting</a></li>
+						<img th:onclick="notebook()"  style="position:absolute;right:60px" src="../static/img/notebook.jpg" th:src="@{img/notebook.jpg}" width=30px height=30px alt="../static/img/notebook.jpg"/>
+						<img th:onclick="cup()"  style="position:absolute;right:20px" src="../static/img/cup.jpg" th:src="@{img/cup.jpg}" width=30px height=30px/>
+				    </ul>
+
+				</nav>
+				
+			</header>
+		</div>
+	</div>
+
+	<!-- Introduction -->
+	<div class="intro section" id="about">
+		<div class="container">
+			<p>Hi, this is Dypro</p>
+			<div class="units-row units-split wrap">
+				<div class="unit-20">
+					<img th:src="@{img/ava.jpg}" src="../static/img/ava.jpg" alt="Avatar">
+				</div>
+				<div class="unit-80">
+					<h1>We live in<br><span id="typed"></span></h1>
+				</div>
+				<p>
+					DYPRO is abbreviation for two names. One is our friend at schooltime, his name is Jerry. The other who I am not familiar with, he's friend of Jerry and he loves chemistry. We all love chemistry indeed. This company in illusion actually has its domain regsitered.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Work Experience -->
+	<div class="work section second" id="experiences">
+		<div class="container">
+			<h1>Personal<br>Infomation</h1>
+			<ul class="work-list">
+				<li>Required</li>
+				<li><a href="#" th:text="${userInfo.getCellPhoneNumber()}">xxxxxxxxxxx</a></li>
+				<li>Cellphone number </li>
+			</ul>
+			<ul class="work-list">
+				<li>Required</li>
+				<li><a href="#" th:text="${userInfo.getUserName()}">Wego</a></li>
+				<li>Username</li>
+			</ul>
+			<ul class="work-list">
+				<li>Required</li>
+				<li><a href="#" th:text="${userInfo.getRegistTime()}">Garuda Indonesia</a></li>
+				<li>Regist time</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- Award & Achievements -->
+	<div class="award section second" id="achievements">
+		<div class="container">
+			<h1>Interest &amp;<br>Profession</h1>
+			<ul class="award-list list-flat">
+				<li>What is Your Favourite Book</li>
+				<li th:text="${userInfo.getOtherInfo().getFavBook()}">Left to be finish</li>
+			</ul>
+			<ul class="award-list list-flat">
+				<li>Who is Your Favourite Writer</li>
+				<li th:text="${userInfo.getOtherInfo().getFavWriter()}">Left to be finish</li>
+			</ul>
+			<ul class="award-list list-flat">
+				<li>What Kind of Book You Prefer</li>
+				<li th:text="${userInfo.getOtherInfo().getKind()}">Left to be finish</li>
+			</ul>
+		</div>
+	</div>
+	<!-- Technical Skills -->
+	<div class="skills section second" id="skills">
+		<div class="container">
+			<h1>Why You Are<br>Here</h1>
+			<ul class="skill-list list-flat">
+				<li>Tell me the reason</li>
+				<li th:text="${userInfo.getOtherInfo().getReason()}">Left to be finish</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- Quote -->
+	<div class="quote">
+		<div class="container text-centered">
+			<h1>fight against the ugliness.</h1>
+		</div>
+	</div>
+
+	<!-- Javascript -->
+
+</body>
+</html>

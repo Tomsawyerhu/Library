@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <title>上传图书</title>
+	<!-- Bootstrap Styles-->
+    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+	
+    <link href="../static/css/select2.min.css"  th:href="@{/css/select2.min.css}" rel="stylesheet" >
+	<link href="../static/css/checkbox3.min.css" th:href="@{/css/checkbox3.min.css}" rel="stylesheet" >
+        <!-- Custom Styles-->
+    <link href="../static/css/custom-styles.css" th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+	<!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="../static/js/jquery-1.10.2.js" th:src="@{/js/jquery-1.10.2.js}"></script>
+      <!-- Bootstrap Js -->
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Metis Menu Js -->
+    <script src="../static/js/jquery.metisMenu.js" th:src="@{/js/jquery.metisMenu.js}"></script>
+	<script src="../static/js/select2.full.min.js" th:src="@{/js/select2.full.min.js}"></script>
+	<script src="../static/js/custom-scripts.js" th:src="@{/js/custom-scripts.js}"></script>
+    <script>
+	function f() {
+        $(".selectbox").select2();
+    }
+	</script>
+</head>
+<body th:onload="f()">
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><strong><i class="icon fa fa-plane"></i> LIBRARY</strong></a>
+				<div id="sideNav" href="">
+			<i class="fa fa-bars icon"></i> 
+			</div>
+            </div>
+
+
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a th:href="@{/admin/analysis}"><i class="fa fa-dashboard"></i>DATAVIEW</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/list}"><i class="fa fa-table"></i> BOOKVIEW</a>
+                    </li>
+                    
+                    <li>
+                        <a href="#" class="active-menu"><i class="fa fa-edit"></i> UPLOAD </a>
+                    </li>        
+                  
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+		  <div class="header"> 
+                        <h1 class="page-header">
+                             上传图书 <small>请注意文件大小格式。</small>
+                        </h1>
+						<ol class="breadcrumb">
+					  <li><a href="#">Home</a></li>
+					  <li><a href="#">Upload</a></li>
+					  <li class="active">Data</li>
+					</ol> 
+									
+		</div>
+		
+            <div id="page-inner"> 
+                       
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title">上传图书</div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <form  action="/add" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label >书名</label>
+                                            <input name="name" class="form-control" placeholder="请输入书名">
+                                        </div>
+										<div class="sub-title">选择分类</div>
+                                    <div>
+                                        <label>
+                                            <select class="selectbox" name="category">
+                                                <optgroup label="Category">
+                                                    <option value="Literature">Literature</option>
+                                                    <option value="History">History</option>
+                                                    <option value="Art">Art</option>
+                                                    <option value="Science">Science</option>
+                                                    <option value="Military">Military</option>
+                                                    <option value="Education">Education</option>
+                                                </optgroup>
+
+                                            </select>
+                                        </label>
+                                    </div>
+									<br><br>
+                                        <div class="form-group">
+                                            <label >索引</label>
+                                            <input  class="form-control" name="indexing" placeholder="请输入索引">
+											
+                                        </div>
+                                        <div class="form-group">
+                                            <label >上传文档</label>
+                                            <input name="file" type="file" >
+                                          
+                                        </div>
+										<div class="form-group">
+                                            <label >上传简介</label>
+                                            <input name="summary" type="file" >
+                                            
+                                        </div>
+										<div class="form-group">
+                                            <label >上传封面</label>
+                                            <input name="image" accept="image/*" type="file" >
+                                            
+                                        </div>
+										<div class="form-group">
+                                            <label >描述1</label>
+                                            <input  name="intro1" class="form-control"  placeholder="请输入描述1">
+                                        </div>
+										<div class="form-group">
+                                            <label >描述2</label>
+                                            <input  name="intro2" class="form-control"  placeholder="请输入描述2">
+                                        </div>
+                                       
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+			</div>
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+
+</body>
+</html>

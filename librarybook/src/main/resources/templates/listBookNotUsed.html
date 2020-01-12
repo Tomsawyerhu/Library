@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>图书管理</title>
+</head>
+<body>
+<div align="center">
+
+</div>
+
+<div style="width:500px;margin:20px auto;text-align: center">
+    <table align='center' border='1' cellspacing='0'>
+        <tr>
+            <td>书名</td>
+            <td>分类</td>
+            <td>ID</td>
+            <td>索引</td>
+            <td>编辑</td>
+            <td>删除</td>
+        </tr>
+            <tr th:each="c:${page}" >
+                <td th:text="${c.name}"></td>
+                <td th:text="${c.category}"></td>
+                <td th:text="${c.id}"></td>
+                <td th:text="${c.indexing}"></td>
+                <td><a th:href="@{/edit(id=${c.id},name=${c.name},category=${c.category})}">编辑</a></td>
+                <td><a th:href="@{/delete(id=${c.id})}">删除</a></td>
+            </tr>
+
+    </table>
+    <br>
+    <div>
+        <a th:href="@{/list(start=0)}">[首  页]</a>
+        <a th:href="@{/list(start=${page.number-1})}">[上一页]</a>
+        <a th:href="@{/list(start=${page.number+1})}">[下一页]</a>
+        <a th:href="@{/list(start=${page.totalPages-1})}">[末  页]</a>
+    </div>
+    <br>
+    <form action="add" method="post" enctype="multipart/form-data">
+
+        书名: <input name="name"> <br>
+        分类: <input name="category"><br>
+        索引：<input name="index"><br>
+        上传图书： <input type="file" name="file" ><br>
+        上传简介： <input type="file" name="summary"><br>
+        上传图片： <input type="file" name="image" accept="image/*"><br>
+        描述1：  <input name="intro1"> <br>
+        描述2：  <input name="intro2"> <br>
+        <button type="submit">提交</button>
+
+    </form>
+</div>
+</body>
+</html>

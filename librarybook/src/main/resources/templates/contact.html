@@ -1,0 +1,48 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Your description goes here" />
+	<meta name="keywords" content="your,keywords,goes,here" />
+	<meta name="author" content="Your Name" />
+	<link rel="stylesheet" type="text/css" href="../static/css/basic-contact.css" th:href="@{css/basic-contact.css}" title="Basic Contact" media="all" />
+	<title>联系我们</title>
+</head>
+<body>
+<div id="wrap">
+	<h1>联 系 我 们</h1>
+	<p>您可以留下您的联系方式和基本信息以方便我们的后续服务。欢迎再次访问图书馆。有意请致电：13915416896</p>
+
+	<div id="sidebar">
+		<p><img src="../static/img/front.jpg"  th:src="@{/img/front.jpg}" width="300" height="300" alt="" /></p>
+		<ul>
+			<li><a href="#">链接1</a> <span>常用的模板网站</span></li>
+			<li><a href="#">链接2</a> <span>电子图书馆网址</span></li>
+			<li><a href="#">链接3</a> <span>我的个人博客</span></li>
+			<li><a th:href="@{/menu}">链接4</a> <span>返回主页</span></li>
+		</ul>
+	</div>
+
+	<div id="content">
+		<h2>Get in touch!</h2>
+		<p>您会有机会结识更多与您趣味相投的图书爱好者，彼此交流；我们定期也会举办活动，提供优惠。快来加入<a href="#">书剑联盟</a>。 开始行动吧！</p>
+
+		<form id="contactform" action="/leaveMessage" method="post" >
+		<p><label for="name">Name:</label><br />
+			<input type="text" name="name" id="name" size="30" /></p>
+		<p><label for="email">E-mail:</label><br />
+			<input type="text" name="email" id="email" size="30" /></p>
+		<p><label for="message">Message:</label><br />
+			<textarea rows="5" cols="30" name="message" id="message"></textarea></p>
+		<p><input type="submit" value="Submit" id="submit_button"  /></p>
+		</form>
+
+	</div>
+
+	<div id="footer">
+		<p>&copy; 2019 Tomsawyer | 更多信息 <a href="#" target="_blank" title="更多信息">我的图书馆</a><br />
+		</p>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>注册页面</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/regist.css}" href="/static/css/regist.css">
+    <script  th:src="@{js/jquery.min.js}" src="../static/js/jquery.min.js"  ></script>
+    <script type="text/javascript">
+        function postUser() {
+            if (reaffirm()) {
+                alert("输入不符合规范");
+                return;
+            }else{
+                $.post("/regist", {
+                    "tele": document.getElementById('tele').value,
+                    "username": document.getElementById('username').value,
+                    "password":document.getElementById('password').value
+                }, function (response) {
+
+                    if (response === "success") alert("注册成功");
+                    else if(response === "failure"){
+                        alert("用户已被注册");
+                    }else {alert("程序出错");}
+                });
+            }
+        }
+        function reaffirm(password) {
+            if (document.getElementById("reaffirm").value !== document.getElementById("password").value) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <article>
+                    <h1><em>Logo</em><span>我的图书馆</span></h1>
+                    <div class="main">
+                        <form>
+                            <div class="tel">
+                                <input type="tel" id="tele" placeholder="手机号"><em>由11个字符组成！</em>
+                            </div>
+                            <div class="userName">
+                                <input type="text" id="username" placeholder="用户名"><em>由5-8个字符组成！</em>
+                            </div>
+                            <div class="password">
+                                <input type="password" id="password" placeholder="密码"><em>使用字母、数字、符号两种及以上的组合，8-12个字符</em>
+                            </div>
+                            <div class="againpwd">
+                                <input type="password" id="reaffirm" placeholder="再次输入密码"><em>两次密码要求一致</em>
+                            </div>
+                            <button th:onclick="postUser()">注册</button>
+                        </form>
+                    </div>
+        </article>
+
+        <footer>
+            <ul>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">人才招聘</a></li>
+                <li><a href="#">友情链接</a></li>
+                <li><a href="#">公司地址</a></li>
+                <li><a href="#">关注我们</a></li>
+            </ul>
+            <p>本网站版权归DYPRO技术有限公司所有，未经许可，不得转载。 </p>
+        </footer>
+    </div>
+</body>
+</html>

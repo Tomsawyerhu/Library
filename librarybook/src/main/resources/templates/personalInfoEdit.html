@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>个人信息编辑</title>
+    <script type="text/javascript">
+        function personalInfo(){
+            window.location.href="/personalInfo";
+        }
+    </script>
+</head>
+<body>
+<div>
+    <form action="/userInfo/update" method="post">
+        <p>Which is Your Favourite Book?</p>
+        <input th:value="${otherInfo.getFavBook()}" name="favBook"/>
+        <p>Who is Your Favourite Writer?</p>
+        <input th:value="${otherInfo.getFavWriter()}" name="favWriter"/>
+        <p>What Kind of Book Do You Prefer?</p>
+        <input th:value="${otherInfo.getKind()}" name="kind"/>
+        <p>Why Are You Here?</p>
+        <input th:value="${otherInfo.getReason()}" name="reason"/><br><br>
+        <input type="submit" value="保存">
+    </form>
+    <br>
+    <input type="button" th:onclick="personalInfo()" value="返回">
+
+
+</div>
+</body>
+</html>

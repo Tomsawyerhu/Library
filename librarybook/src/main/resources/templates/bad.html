@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登陆失败</title>
+    <script type="text/javascript">
+        function jump() {
+            window.setTimeout("window.location.href='/index'",2000);
+        }
+    </script>
+</head>
+<body onload="jump()">
+<div>
+    <p th:text="${bad}"></p><br>
+    <div id="displayBox"></div>
+    <script>
+        x = '';
+        function countSecond() {
+            x = (x == '...') ? '.': (x + '.');
+            document.getElementById('displayBox').innerText = "2秒后返回登陆界面"+x;
+            setTimeout("countSecond()", 300);
+        }
+        countSecond();
+    </script>
+
+</div>
+</body>
+</html>

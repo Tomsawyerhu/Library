@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html >
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>留言板</title>
+<link href="../static/css/messageboard.css" th:href="@{css/messageboard.css}" rel="stylesheet" type="text/css" />
+<script src="../static/js/jquery-1.4.4.min.js" th:src="@{js/jquery-1.4.4.min.js}" type="text/javascript"></script>
+<script src="../static/js/jq_scroll.js" th:src="@{js/jq_scroll.js}" type="text/javascript"></script>
+<script type="text/javascript" >
+    function submit() {
+        if(document.getElementById("message").value!=null){
+        $.post("/saveMessage",{"message":document.getElementById("message").value},function (response) {
+            if(response==="success") alert("提交成功");
+            else alert("提交失败");
+        });
+        }
+        else alert("消息不能为空");
+
+    }
+function f(){
+        $("#scrollDiv").Scroll({line:1,speed:500,timer:3000,up:"but_up",down:"but_down"});
+}
+function list(start) {
+    window.location.href="/listBoardMessage?start="+start;
+}
+
+function list2() {
+    window.location.href="/listBoardMessage?start="+document.getElementById("pagenum").value;
+}
+</script>
+</head>
+
+<body onload="f();">
+<p align="center"><strong>看看水友们说些啥：</strong></p>
+<p>&nbsp;</p>
+<div class="scrollbox">
+    <div id="scrollDiv">
+        <ul>
+            <li><h3><a href="#" class="linktit" th:text="${page1.name}">移动娱乐业务突飞</a></h3> <div th:text="${page1.message}">为了探索推进公车改革后，新能源汽车分时租赁项目试点工作，并成立了试点工作小组... </div></li>
+            <li><h3><a href="#" class="linktit" th:text="${page2.name}">不停转动向上滚动可控制向上向下滚动特效</a></h3> <div th:text="${page2.message}">DIV CSS JS自动不断向上一个一个滚动可控制向上向下滚动特效... </div></li>
+            <li><h3><a href="#" class="linktit" th:text="${page3.name}">全国涂料总产量呈现直线下滑态势</a></h3> <div th:text="${page3.message}">我国涂料工业将面临涂料消费税征收全面铺开，环保压力持续增加，2015年的形势不容乐观... </div></li>
+            <li><h3><a href="#" class="linktit" th:text="${page4.name}">镂空渔网超吸睛</a></h3> <div th:text="${page4.message}">镂空罩衫，短短的版型穿起来显高又俏皮，内搭长款连衣裙，非常大方哦... </div></li>
+            <li><h3><a href="#" class="linktit" th:text="${page5.name}">主题创业街亮相</a></h3> <div th:text="${page5.message}">目前已有包括咖啡厅、酒吧、餐厅、瑜伽室在内的8家商铺入驻该火车... </div></li>
+        </ul>
+    </div>
+    <div class="scroltit"><div class="updown" id="but_down">向上</div><div class="updown" id="but_up">向下</div></div>
+</div>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+    <span><a th:href="@{/listBoardMessage(start=${page.number})}" >上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/listBoardMessage(start=${page.number+2})}" >下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input style="width:120px;height: auto" id="pagenum" type="text" placeholder="输入页数">&nbsp;&nbsp;<button th:onclick="list2()">查看</button>
+</span>
+</div><br>
+<div id="messageDiv" style="text-align:center;margin:0px auto">
+    <input id="message" placeholder="留下点东西吧">&nbsp;&nbsp;<button th:onclick="submit()">提交</button>
+</div>
+</body>
+</html>
